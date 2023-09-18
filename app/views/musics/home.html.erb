@@ -1,0 +1,63 @@
+ 
+<%= stylesheet_link_tag 'musiclist' %>
+ 
+<div class="container py-5">
+  <div class="row ">
+    <div class="text-center p-5">
+     <h1>Music List</h1>
+    </div>
+    <% @musics.each do |music| %>
+      <div class=" cards col-sm-12 col-md-6 col-lg-4 mb-4">
+        <div class="">
+          <div class="">
+            <h5 class=" "><%= music.name %></h5>
+            <div class="music-container">
+              <% if music.thumbnail.attached? %>
+                <%= image_tag music.thumbnail, class: 'music-thumbnail rounded-circle' %>
+              <% end %>
+              <% if music.audio.attached? %>
+                <div class="custom-audio-player">
+                  <audio id="audio_<%= music.id %>" class="custom-audio-player" controls>
+                    <source src="<%= rails_blob_path(music.audio) %>" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio> 
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+ 
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Get all audio elements
+    const audioElements = document.querySelectorAll('.custom-audio-player');
+
+    // Add event listeners to each audio element
+    audioElements.forEach(function (audioElement) {
+      audioElement.addEventListener('ended', function () {
+        // Get the current music's ID from the audio element's ID
+        const currentMusicId = audioElement.id.split('_')[1];
+
+        // Calculate the ID of the next track (increment by 1)
+        const nextMusicId = parseInt(currentMusicId) + 1;
+
+        // Construct the ID of the next audio element
+        const nextAudioElementId = 'audio_' + nextMusicId;
+
+        // Get the next audio element
+        const nextAudioElement = document.getElementById(nextAudioElementId);
+
+        // Play the next audio element if it exists
+        if (nextAudioElement) {
+          audioElement.pause(); // Pause the current audio
+          nextAudioElement.play(); // Play the next audio
+        }
+      });
+    });
+  });
+</script>

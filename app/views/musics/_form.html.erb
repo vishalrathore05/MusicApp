@@ -1,0 +1,13 @@
+<%= form_with(model: music, local: true) do |form| %>
+    <!-- Other fields -->
+    <div class="field">
+      <%= form.label :thumbnail %>
+      <%= form.file_field :thumbnail %>
+    </div>
+    <div class="field">
+      <%= form.label :audio %>
+      <%= form.file_field :audio %>
+    </div>
+    <!-- Submit button -->
+  <% end %>
+  

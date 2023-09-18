@@ -1,0 +1,24 @@
+body {
+  background-color: #778e99; /* Change this color to your desired background color */
+  color: white;
+}
+.card {
+color: #778e99;
+}
+.cards{
+background-color: #85b595;
+}
+
+/* styles.css */
+
+.music-container {
+  display: flex; /* Use flexbox to align items in a row */
+  align-items: center; /* Vertically center items */
+}
+
+.music-thumbnail {
+  width: 50px; /* Set the desired width for the circular image */
+  height: 50px; /* Set the desired height for the circular image */
+  margin-right: 20px; /* Add spacing between the image and audio player */
+  border-radius: 50%; /* Make the image circular */
+}
